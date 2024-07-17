@@ -9,12 +9,13 @@ public class ProducerExample {
     public static void main(String[] args) {
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:9092");
-        props.put("security.protocol", "SASL_PLAINTEXT");
-        props.put("sasl.mechanism", "OAUTHBEARER");
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("sasl.jaas.config", "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required ;");
-        props.put("sasl.oauthbearer.jwks.endpoint.url","<ISSUER_URI>");
+//        props.put("security.protocol", "SASL_PLAINTEXT");
+//        props.put("sasl.mechanism.inter.broker.protocol","OAUTHBEARER");
+//        props.put("sasl.mechanism", "OAUTHBEARER");
+//        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+//        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+//        props.put("sasl.jaas.config", "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;");
+//        props.put("sasl.oauthbearer.jwks.endpoint.url","http://localhost:8080/realms/master/protocol/openid-connect/certs ");
 
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);

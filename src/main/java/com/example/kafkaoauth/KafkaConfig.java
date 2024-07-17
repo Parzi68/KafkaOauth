@@ -25,9 +25,14 @@ public class KafkaConfig {
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 //        configProps.put("security.protocol", "SASL_PLAINTEXT");
-        configProps.put("listener.name.sasl_plaintext.sasl.enabled.mechanism", "OAUTHBEARER");
-        configProps.put("sasl.jaas.config", "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required  ; ");
-        configProps.put("sasl.oauthbearer.jwks.endpoint.url","<ISSUER_URI>");
+//        configProps.put("sasl.mechanism.inter.broker.protocol","OAUTHBEARER");
+//        configProps.put("listener.name.sasl_plaintext.sasl.enabled.mechanism", "OAUTHBEARER");
+//        configProps.put("sasl.enabled.mechanisms","OAUTHBEARER");
+//        configProps.put("sasl.mechanism","OAUTHBEARER");
+//        configProps.put("sasl.oauthbearer.token.endpoint.url", "http://localhost:8080/realms/master/protocol/openid-connect/token");
+//        configProps.put("sasl.login.callback.handler.class","org.apache.kafka.common.security.oauthbearer.secured.OAuthBearerLoginCallbackHandler");
+//        configProps.put("sasl.jaas.config", "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required clientId=\"kafka\" clientSecret=\"5HEzPHIIqjBw5RYFye5oRsi7rFYglwoY\";");
+//        configProps.put("sasl.oauthbearer.jwks.endpoint.url","http://localhost:8080/realms/master/protocol/openid-connect/certs ");
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
@@ -44,9 +49,14 @@ public class KafkaConfig {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 //        props.put("security.protocol", "SASL_PLAINTEXT");
-        props.put("listener.name.sasl_plaintext.sasl.enabled.mechanism", "OAUTHBEARER");
-        props.put("sasl.jaas.config", "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required ;");
-        props.put("sasl.oauthbearer.jwks.endpoint.url","<ISSUER_URI>");
+//        props.put("sasl.mechanism.inter.broker.protocol","OAUTHBEARER");
+//        props.put("sasl.enabled.mechanisms","OAUTHBEARER");
+//        props.put("sasl.mechanism","OAUTHBEARER");
+//        props.put("listener.name.sasl_plaintext.sasl.enabled.mechanism", "OAUTHBEARER");
+//        props.put("sasl.oauthbearer.token.endpoint.url", "http://localhost:8080/realms/master/protocol/openid-connect/token");
+//        props.put("sasl.login.callback.handler.class","org.apache.kafka.common.security.oauthbearer.secured.OAuthBearerLoginCallbackHandler");
+//        props.put("sasl.jaas.config", "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required         clientId=\"kafka\" clientSecret=\"5HEzPHIIqjBw5RYFye5oRsi7rFYglwoY\";");
+//        props.put("sasl.oauthbearer.jwks.endpoint.url","http://localhost:8080/realms/master/protocol/openid-connect/certs ");
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
