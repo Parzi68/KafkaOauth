@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController
 @RequestMapping("/kafka")
 public class KafkaController {
@@ -35,33 +33,55 @@ public class KafkaController {
                                     @RequestParam("topic") String topic,
                                     @RequestParam("message") String message) {
         try {
-            // Log the authentication object class type
             System.out.println("Authentication class: " + authentication.getClass().getName());
 
-            // Extract JWT from the authentication token
             String jwt = extractJwt(authentication);
             if (jwt == null) {
                 throw new IllegalArgumentException("Invalid authentication token type or missing JWT.");
             }
 
-            // Perform authorization check with OPA
             System.out.println("Sending JWT to OPA: " + jwt);
             System.out.println("Sending topic to OPA: " + topic);
 
-            boolean isAuthorized = opaService.isAuthorized(jwt, topic);
+            boolean isAuthorized = opaService.isAuthorized(jwt, topic,"produce");
             if (!isAuthorized) {
                 throw new SecurityException("Not authorized to produce messages for topic: " + topic);
             }
 
-            // Send the message to the specified Kafka topic
             kafkaService.sendMessage(message, topic);
             return "Message produced: " + message;
         } catch (Exception e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
             return "Error: " + e.getMessage();
         }
     }
 
+    @GetMapping("/consume")
+    public String consumeMessageGet(Authentication authentication,
+                                    @RequestParam("topic") String topic) {
+        try {
+            System.out.println("Authentication class: " + authentication.getClass().getName());
+
+            String jwt = extractJwt(authentication);
+            if (jwt == null) {
+                throw new IllegalArgumentException("Invalid authentication token type or missing JWT.");
+            }
+
+            System.out.println("Sending JWT to OPA: " + jwt);
+            System.out.println("Sending topic to OPA: " + topic);
+
+            boolean isAuthorized = opaService.isAuthorized(jwt, topic,"consume");
+            if (!isAuthorized) {
+                throw new SecurityException("Not authorized to consume messages from topic: " + topic);
+            }
+
+            String message = kafkaService.consumeMessage(topic);
+            return "Message consumed: " + message;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        }
+    }
 
     private String extractJwt(Authentication authentication) {
         if (authentication instanceof JwtAuthenticationToken) {
@@ -71,7 +91,6 @@ public class KafkaController {
             OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
             String clientRegistrationId = oauthToken.getAuthorizedClientRegistrationId();
             String principalName = oauthToken.getName();
-
 
             OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(clientRegistrationId, principalName);
 
@@ -87,6 +106,4 @@ public class KafkaController {
             throw new IllegalArgumentException("Invalid authentication token type: " + authentication.getClass().getName());
         }
     }
-
-
 }
