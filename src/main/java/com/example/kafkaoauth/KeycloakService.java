@@ -9,12 +9,15 @@ import org.keycloak.admin.client.resource.UsersResource;
 
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Provides a service for interacting with Keycloak, including fetching users and roles.
+ * The service is initialized at startup and connects to a Keycloak server running on localhost.
+ * It fetches all users and their associated roles from the "master" realm.
+ */
 @Service
 public class KeycloakService {
 

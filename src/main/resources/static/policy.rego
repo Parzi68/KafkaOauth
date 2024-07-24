@@ -1,3 +1,16 @@
+/**
+ * This Rego policy file defines the authorization rules for a Kafka-based application.
+ * 
+ * The policy allows access to Kafka topics based on the user's assigned roles and permissions.
+ * By default, all requests are denied, and the policy explicitly allows access if the user
+ * is granted the necessary permissions.
+ * 
+ * The policy extracts the user's JWT payload to determine their assigned roles, and then
+ * checks if any of the user's roles have permissions that match the requested action and topic.
+ * 
+ * The `role_permissions` data structure defines the permissions for each role, which would
+ * typically be provided as input data or from an external source in a real-world scenario.
+ */
 package kafka.authz
 
 import rego.v1

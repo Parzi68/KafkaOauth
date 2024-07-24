@@ -1,3 +1,6 @@
+/**
+ * This package contains the implementation of the KafkaService class, which provides functionality for sending and consuming messages using Apache Kafka.
+ */
 package com.example.kafkaoauth;
 
 import org.springframework.kafka.annotation.KafkaListener;

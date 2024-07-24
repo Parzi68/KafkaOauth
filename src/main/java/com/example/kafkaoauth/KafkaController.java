@@ -1,6 +1,5 @@
 package com.example.kafkaoauth;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -13,6 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The `KafkaController` class is a Spring REST controller that provides endpoints for producing and consuming messages to/from a Kafka topic.
+ * 
+ * The controller uses the `KafkaService` to send and receive messages, and the `OpaService` to check if the user is authorized to perform the requested action.
+ * 
+ * The `produceMessageGet` method allows a user to produce a message to a specified Kafka topic, if they are authorized to do so.
+ * 
+ * The `consumeMessageGet` method allows a user to consume a message from a specified Kafka topic, if they are authorized to do so.
+ * 
+ * The `extractJwt` method is a helper method that extracts the JWT token from the user's authentication, which is then used to check authorization with the `OpaService`.
+ */
 @RestController
 @RequestMapping("/kafka")
 public class KafkaController {
@@ -21,7 +31,6 @@ public class KafkaController {
     private final OpaService opaService;
     private final OAuth2AuthorizedClientService authorizedClientService;
 
-    @Autowired
     public KafkaController(KafkaService kafkaService, OpaService opaService, OAuth2AuthorizedClientService authorizedClientService) {
         this.kafkaService = kafkaService;
         this.opaService = opaService;
