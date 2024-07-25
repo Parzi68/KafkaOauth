@@ -27,6 +27,7 @@ import com.vaadin.flow.spring.security.VaadinWebSecurity;
 @EnableWebSecurity
 public class SecurityConfigs {
 
+    
     // ... existing code ...
 
     SecurityFilterChain securityFilterChain (HttpSecurity httpSecurity) throws Exception {
