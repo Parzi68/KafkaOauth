@@ -42,7 +42,7 @@ public class SecurityConfigs extends VaadinWebSecurity {
         httpSecurity.oauth2ResourceServer(resourceServerConfigurer -> {
             resourceServerConfigurer.jwt(Customizer.withDefaults());
         });
-        super.configure(httpSecurity);
+        // Removed super.configure(httpSecurity) line
         return httpSecurity.build();
     }
 }
