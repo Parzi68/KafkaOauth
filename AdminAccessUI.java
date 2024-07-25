@@ -1,5 +1,5 @@
-// com/example/adminaccess/AdminAccessUI.java
-package com.example.adminaccess;
+// src/main/java/com/example/kafkaoauth/AdminAccessUI.java
+package com.example.kafkaoauth;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;

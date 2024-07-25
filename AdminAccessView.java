@@ -1,5 +1,5 @@
-// com/example/adminaccess/AdminAccessView.java
-package com.example.adminaccess;
+// src/main/java/com/example/kafkaoauth/AdminAccessView.java
+package com.example.kafkaoauth;
 
 import com.vaadin.flow.component.page.ViewportMeta;
 import com.vaadin.flow.router.View;
