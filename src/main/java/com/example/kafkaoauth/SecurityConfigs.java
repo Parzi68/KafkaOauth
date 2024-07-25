@@ -29,7 +29,8 @@ public class SecurityConfigs {
 
     // ... existing code ...
 
-    SecurityFilterChain securityFilterChain (HttpSecurity httpSecurity) throws Exception {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable());
         httpSecurity.authorizeHttpRequests( req -> {
             req.anyRequest().authenticated();
@@ -42,6 +43,9 @@ public class SecurityConfigs {
         httpSecurity.oauth2ResourceServer(resourceServerConfigurer -> {
             resourceServerConfigurer.jwt(Customizer.withDefaults());
         });
+
+        VaadinWebSecurity vaadinWebSecurity = new VaadinWebSecurity();
+        vaadinWebSecurity.configure(httpSecurity);
         return httpSecurity.build();
     }
 }
