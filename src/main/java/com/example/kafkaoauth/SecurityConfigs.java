@@ -42,7 +42,7 @@ public class SecurityConfigs {
         httpSecurity.oauth2ResourceServer(resourceServerConfigurer -> {
             resourceServerConfigurer.jwt(Customizer.withDefaults());
         });
-        configure(httpSecurity); // Changed this line
+        configureVaadin(httpSecurity); // Changed this line
         return httpSecurity.build();
     }
 }
