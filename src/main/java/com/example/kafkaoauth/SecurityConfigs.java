@@ -25,7 +25,7 @@ import com.vaadin.flow.spring.security.VaadinWebSecurity;
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfigs {
+public class SecurityConfigs extends VaadinWebSecurity {
 
     // ... existing code ...
 
