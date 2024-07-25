@@ -27,7 +27,6 @@ import com.vaadin.flow.spring.security.VaadinWebSecurity;
 @EnableWebSecurity
 public class SecurityConfigs {
 
-    
     // ... existing code ...
 
     SecurityFilterChain securityFilterChain (HttpSecurity httpSecurity) throws Exception {
@@ -43,8 +42,7 @@ public class SecurityConfigs {
         httpSecurity.oauth2ResourceServer(resourceServerConfigurer -> {
             resourceServerConfigurer.jwt(Customizer.withDefaults());
         });
-        // VaadinWebSecurity.configure(httpSecurity); // Commented out this line
-        VaadinWebSecurity.configureVaadin(httpSecurity); // Changed this line
+        VaadinWebSecurity.configure(httpSecurity); // Changed this line back
         return httpSecurity.build();
     }
 }
