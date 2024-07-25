@@ -25,12 +25,11 @@ import com.vaadin.flow.spring.security.VaadinWebSecurity;
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfigs {
+public class SecurityConfigs extends VaadinWebSecurity {
 
     // ... existing code ...
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    SecurityFilterChain securityFilterChain (HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable());
         httpSecurity.authorizeHttpRequests( req -> {
             req.anyRequest().authenticated();
@@ -43,9 +42,7 @@ public class SecurityConfigs {
         httpSecurity.oauth2ResourceServer(resourceServerConfigurer -> {
             resourceServerConfigurer.jwt(Customizer.withDefaults());
         });
-
-        VaadinWebSecurity vaadinWebSecurity = new VaadinWebSecurity();
-        vaadinWebSecurity.configure(httpSecurity);
+        super.configure(httpSecurity);
         return httpSecurity.build();
     }
 }
