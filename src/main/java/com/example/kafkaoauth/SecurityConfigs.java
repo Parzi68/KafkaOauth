@@ -17,6 +17,7 @@ import com.vaadin.flow.spring.security.VaadinWebSecurity;
  * - Disabling anonymous access
  * - Enabling OAuth2 login and client support
  * - Enabling JWT-based resource server configuration
+ * - Enabling Vaadin security configuration
  *
  * @param httpSecurity The HttpSecurity object to configure
  * @return The configured SecurityFilterChain
@@ -26,7 +27,7 @@ import com.vaadin.flow.spring.security.VaadinWebSecurity;
 @EnableWebSecurity
 public class SecurityConfigs {
 
-    
+    // ... existing code ...
 
     SecurityFilterChain securityFilterChain (HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable());
@@ -41,9 +42,7 @@ public class SecurityConfigs {
         httpSecurity.oauth2ResourceServer(resourceServerConfigurer -> {
             resourceServerConfigurer.jwt(Customizer.withDefaults());
         });
-        // super.configure(httpSecurity);
+        VaadinWebSecurity.configure(httpSecurity);
         return httpSecurity.build();
     }
-
-
 }
