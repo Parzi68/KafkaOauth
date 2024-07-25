@@ -29,7 +29,8 @@ public class SecurityConfigs extends VaadinWebSecurity {
 
     // ... existing code ...
 
-    SecurityFilterChain securityFilterChain (HttpSecurity httpSecurity) throws Exception {
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable());
         httpSecurity.authorizeHttpRequests( req -> {
             req.anyRequest().authenticated();
@@ -42,7 +43,6 @@ public class SecurityConfigs extends VaadinWebSecurity {
         httpSecurity.oauth2ResourceServer(resourceServerConfigurer -> {
             resourceServerConfigurer.jwt(Customizer.withDefaults());
         });
-        // Removed super.configure(httpSecurity) line
-        return httpSecurity.build();
+        super.configure(httpSecurity);
     }
 }
